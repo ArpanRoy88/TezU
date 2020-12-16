@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MagazineUpload">
+
+    <LinearLayout
+        android:id="@+id/lay1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:text="Enter Details"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/lay2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/lay1"
+        tools:ignore="InvalidId">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TextInputLayoutarticleTitle"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <EditText
+                android:id="@+id/articleTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:inputType="textPersonName"
+                android:hint="Enter Title of the Magazine" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TextInputLayoutSelectPdf"
+            android:layout_marginTop="10dp"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/TextInputLayoutarticleTitle"
+            >
+            <EditText
+                android:id="@+id/selectPdf"
+                android:textSize="18sp"
+                android:layout_marginTop="15dp"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:hint="Select pdf from storage"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/browseButton"
+            android:text="Browse"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/TextInputLayoutarticleTitle"
+            android:layout_toRightOf="@id/TextInputLayoutSelectPdf"
+            tools:ignore="UnknownId" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TextInputLayoutSemester"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/TextInputLayoutSelectPdf"
+            >
+            <EditText
+                android:id="@+id/semester"
+                android:textSize="18sp"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter semester spring/autumn"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </RelativeLayout>
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lay2"
+        android:text="POST"
+        android:textColor="@color/colorWhite"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:padding="5dp"
+        android:elevation="10dp"
+        android:background="@drawable/custom_button"
+        tools:ignore="NotSibling">
+
+    </Button>
+
+
+</RelativeLayout>

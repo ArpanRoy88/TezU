@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/aclonica</item>
+        <item>@font/adamina</item>
+        <item>@font/bad_script</item>
+        <item>@font/bigshot_one</item>
+        <item>@font/geostar</item>
+        <item>@font/kavoon</item>
+        <item>@font/modern_antiqua</item>
+        <item>@font/slackey</item>
+    </array>
+</resources>

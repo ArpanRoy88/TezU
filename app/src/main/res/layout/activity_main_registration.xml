@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainRegistration">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="100dp"
+        app:srcCompat="@drawable/tu_logo" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_below="@id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/aclonica"
+        android:text="Register As"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp" />
+
+
+
+    <Button
+        android:id="@+id/btnStudentRegister"
+        android:layout_below="@id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:layout_width="180dp"
+        android:layout_height="45dp"
+        android:background="@drawable/custom_button"
+        android:lineSpacingExtra="14sp"
+        android:text="Student"
+        android:textColor="@color/colorWhite"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btnStaffRegister"
+        android:layout_below="@id/btnStudentRegister"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:layout_width="180dp"
+        android:layout_height="45dp"
+        android:background="@drawable/custom_button"
+        android:lineSpacingExtra="14sp"
+        android:text="Staff"
+        android:textColor="@color/colorWhite"
+        android:textAllCaps="true"
+        android:textSize="20sp" />
+
+
+</RelativeLayout>

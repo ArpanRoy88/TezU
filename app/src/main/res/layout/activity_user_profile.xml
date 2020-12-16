@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserProfile">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/my_toolbar"/>
+
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/StudentProfilePicture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/userphoto"
+        app:civ_border_width="2dp"/>
+
+    <TextView
+        android:id="@+id/profileStudentName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/StudentProfilePicture"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/bigshot_one"
+
+        android:textSize="30dp" />
+
+    <LinearLayout
+        android:id="@+id/programme_department_linear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/profileStudentName"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/profileStudentProgramme"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/adamina"
+            android:paddingRight="4dp"
+
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/profileStudentDepartment"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/adamina"
+            android:paddingLeft="4dp"
+
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/profileStudentSchool"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/programme_department_linear"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/adamina"
+
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+
+
+    <RelativeLayout
+        android:id="@+id/detailsRelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profileStudentSchool"
+        android:layout_marginTop="20dp"
+        android:background="#cfd8dc"
+        android:elevation="4dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        >
+
+        <TextView
+            android:id="@+id/emailTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Your email"
+            android:fontFamily="monospace"
+            android:textSize="16dp"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/profileStudentEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emailTitle"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="monospace"
+
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/RollTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Roll Number"
+            android:fontFamily="monospace"
+            android:textSize="16dp"
+            android:layout_below="@id/profileStudentEmail"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/profileStudentRollNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/RollTitle"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="monospace"
+
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/HostelTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Hostel"
+            android:fontFamily="monospace"
+            android:textSize="16dp"
+            android:layout_below="@id/profileStudentRollNumber"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/profileStudentHostel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/HostelTitle"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="monospace"
+
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/ContactTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Contact"
+            android:fontFamily="monospace"
+            android:textSize="16dp"
+            android:layout_below="@id/profileStudentHostel"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/profileStudentContactNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ContactTitle"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="monospace"
+
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/genderTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Gender"
+            android:fontFamily="monospace"
+            android:textSize="16dp"
+            android:layout_below="@id/profileStudentContactNumber"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/profileStudentGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/genderTitle"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="monospace"
+            android:layout_marginBottom="15dp"
+            android:textSize="15sp" />
+
+
+
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

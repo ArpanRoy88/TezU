@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DisplayArticle">
+
+    <RelativeLayout
+        android:id="@+id/rel1"
+        android:layout_margin="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:elevation="10dp"
+        android:background="#006064"
+        >
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/display_article_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="InvalidId"
+            android:text="TITLE"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:textSize="18sp"/>
+        <TextView
+            android:layout_marginTop="8dp"
+            android:id="@+id/display_article_author"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="AUTHOR"
+            android:layout_below="@id/display_article_title"
+            android:textColor="#ffffff"
+            tools:ignore="InvalidId,UnknownId" />
+        <TextView
+            android:layout_marginTop="8dp"
+            android:id="@+id/display_article_dept"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DEPT"
+            android:layout_below="@id/display_article_author"
+            android:textColor="#ffffff"
+            tools:ignore="InvalidId,UnknownId" />
+        <TextView
+            android:layout_marginTop="8dp"
+            android:id="@+id/display_article_date"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="DATE"
+            android:layout_below="@id/display_article_dept"
+            android:textColor="#ffffff"
+            tools:ignore="InvalidId,UnknownId" />
+        <ImageView
+            android:id="@+id/like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/display_article_author"
+            android:layout_below="@id/display_article_title"
+            android:src="@drawable/view"/>
+
+        <ImageView
+            android:id="@+id/view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/display_article_date"
+            android:layout_below="@id/display_article_dept"
+            android:src="@drawable/ic_interested"
+            tools:ignore="UnknownId" />
+        <TextView
+            android:id="@+id/likeCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/display_article_title"
+            android:layout_toRightOf="@id/like"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="5dp"
+            android:text="300"/>
+        <TextView
+            android:id="@+id/viewsCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/display_article_dept"
+            android:layout_toRightOf="@id/view"
+            android:text="300"
+            android:layout_marginLeft="5dp"
+            android:textColor="#ffffff"
+            tools:ignore="UnknownId" />
+
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_margin="5dp"
+        android:id="@+id/rel2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rel1"
+        android:elevation="10dp"
+        android:padding="5dp"
+        android:background="#E0F2F1"
+        >
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/display_article_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="hello asjcbksackasncaskcsakcsakcnaskjchna acavcac avav vava avav vav vav vav vav vav vav vav vav "
+            />
+
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

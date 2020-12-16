@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "726233873189",
+    "firebase_url": "https://tezu-33542.firebaseio.com",
+    "project_id": "tezu-33542",
+    "storage_bucket": "tezu-33542.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:726233873189:android:5f6a3c28e45665f86478cc",
+        "android_client_info": {
+          "package_name": "com.example.tezu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "726233873189-euck25o1587o0mo12b7e05ivka2sjl9f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tezu",
+            "certificate_hash": "4188cf9a1474f9e6621707316a54f1e1d583fc58"
+          }
+        },
+        {
+          "client_id": "726233873189-k9ukjrele2fcd1dalhv6pc17k07r5gi4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhuviRFvl_OiRWTedN0gDdGtrnE3GammY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "726233873189-k9ukjrele2fcd1dalhv6pc17k07r5gi4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

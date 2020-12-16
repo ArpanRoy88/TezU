@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5dp"
+    android:elevation="10dp"
+    app:cardUseCompatPadding="true"
+    android:padding="5dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/articleBodyRelativeLayout"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/articleTitleInRecycler"
+                android:text="Article Title"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="#006064"
+                android:textColor="#ffffff"
+                />
+            <TextView
+                android:id="@+id/articleDescInRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:text="Description Part"
+                android:layout_below="@id/articleTitleInRecycler"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:background="#E0F2F1"
+                />
+            <TextView
+                android:id="@+id/etc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/articleDescInRecycler"
+                android:text="..."
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:background="#E0F2F1"/>
+            <RelativeLayout
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_below="@id/etc"
+                android:background="#F5F5F5">
+
+                <ImageView
+                    android:id="@+id/articleLike"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_interested"
+                    android:layout_marginLeft="5dp"
+                    />
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/likeCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/articleLike"
+                    android:text="300"/>
+                <ImageView
+                    android:id="@+id/articleViews"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/likeCount"
+                    android:src="@drawable/ic_icomment"
+                    android:layout_marginLeft="20dp"/>
+                <TextView
+                    android:id="@+id/articleViewsCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/articleViews"
+                    android:layout_marginLeft="5dp"
+                    android:text="500"/>
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

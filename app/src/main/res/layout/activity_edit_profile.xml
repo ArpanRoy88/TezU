@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditProfileActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/toolbar"
+            android:id="@+id/my_toolbar"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImageEditProfile"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/my_toolbar"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/userphoto"
+            app:civ_border_width="2dp"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroupGenderEditProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button"
+            android:backgroundTint="#ffffff"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:padding="5dp"
+            android:elevation="3dp"
+            android:layout_below="@id/profileImageEditProfile">
+
+            <RadioButton
+                android:id="@+id/radioButtonMaleEditProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Male"
+                android:checked="false" />
+
+            <RadioButton
+                android:id="@+id/radioButtonFemaleEditProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female"
+                android:checked="false"/>
+
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/editTextPersonNameEditProfile"
+            android:layout_width="360dp"
+            android:layout_height="40dp"
+            android:ems="10"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/radioGroupGenderEditProfile"
+            android:inputType="textPersonName"
+            android:hint="Enter Name" />
+
+        <EditText
+            android:id="@+id/editTextRollNumberEditProfile"
+            android:layout_width="360dp"
+            android:layout_height="40dp"
+            android:ems="10"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/editTextPersonNameEditProfile"
+            android:inputType="textCapCharacters"
+            android:hint="Roll Number" />
+
+        <EditText
+            android:id="@+id/editTextEmailAddressEditProfile"
+            android:layout_width="360dp"
+            android:layout_height="40dp"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:layout_below="@id/editTextRollNumberEditProfile"
+            android:layout_centerHorizontal="true"
+            android:hint="TU mail id"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/editTextPhoneEditProfile"
+            android:layout_width="360dp"
+            android:layout_height="40dp"
+            android:ems="10"
+            android:inputType="phone"
+            android:layout_marginTop="10dp"
+            android:hint="Phone Number"
+            android:layout_below="@id/editTextEmailAddressEditProfile"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/editTextPhoneEditProfile"
+            android:text="School"
+            android:textSize="18sp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"/>
+        <Spinner
+            android:id="@+id/spinnerSchoolEditProfile"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/editTextPhoneEditProfile"
+            android:layout_marginLeft="160dp"
+            android:layout_marginTop="10dp"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/spinnerSchoolEditProfile"
+            android:text="Department"
+            android:textSize="18sp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"/>
+        <Spinner
+            android:id="@+id/spinnerDeptEditProfile"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/spinnerSchoolEditProfile"
+            android:layout_marginLeft="160dp"
+            android:layout_marginTop="10dp"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/spinnerDeptEditProfile"
+            android:text="Programme"
+            android:textSize="18sp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"/>
+
+        <Spinner
+            android:id="@+id/spinnerProgrammeEditProfile"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/spinnerDeptEditProfile"
+            android:layout_marginLeft="160dp"
+            android:layout_marginTop="10dp"
+            android:spinnerMode="dropdown" />
+
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/spinnerProgrammeEditProfile"
+            android:text="Hostel"
+            android:textSize="18sp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"/>
+        <Spinner
+            android:id="@+id/spinnerHostelEditProfile"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/spinnerProgrammeEditProfile"
+            android:layout_marginLeft="160dp"
+            android:layout_marginTop="10dp"
+            android:spinnerMode="dropdown"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/spinnerHostelEditProfile"
+            android:layout_marginTop="15dp"
+            android:text="Update Profile"
+            android:padding="10dp"
+            android:gravity="center"
+            />
+
+
+    </RelativeLayout>
+
+</ScrollView>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/nav_event"
+        android:icon="@drawable/event"
+        android:title="@string/nav_event" />
+    <item
+        android:id="@+id/nav_magazine"
+        android:icon="@drawable/magazine"
+        android:title="@string/nav_magazine" />
+    <item
+        android:id="@+id/nav_add"
+        android:icon="@drawable/addi"
+        android:title="" />
+    <item
+        android:id="@+id/nav_forum"
+        android:icon="@drawable/forum"
+        android:title="@string/nav_forum" />
+    <item
+        android:id="@+id/nav_bus"
+        android:icon="@drawable/buysell"
+        android:title="@string/nav_bus" />
+</menu>
