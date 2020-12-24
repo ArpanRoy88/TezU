@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/display_article_author"
             android:layout_below="@id/display_article_title"
-            android:src="@drawable/view"/>
+            android:src="@drawable/ic_interested"/>
 
         <ImageView
             android:id="@+id/view"
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/display_article_date"
             android:layout_below="@id/display_article_dept"
-            android:src="@drawable/ic_interested"
+            android:src="@drawable/view"
             tools:ignore="UnknownId" />
         <TextView
             android:id="@+id/likeCounter"

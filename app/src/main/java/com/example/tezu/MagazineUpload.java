@@ -1,11 +1,5 @@
 package com.example.tezu;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -16,6 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tezu.Model.PostArtcle;
 import com.example.tezu.Model.User;
@@ -34,6 +33,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 import static android.widget.Toast.LENGTH_SHORT;
@@ -97,10 +97,6 @@ public class MagazineUpload extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void submitArticle(final Uri pdfUrl) {
-
-
-
-
 
 
         final String STORAGE_PATH_UPLOADS = "notifications/";
@@ -170,16 +166,21 @@ public class MagazineUpload extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Uri> task) {
                             Uri downloadfile = task.getResult();
 
+                            Date date =new Date();
+                            String unique = String.valueOf(date.getTime());
+                            //databaseReference.push().toString(date);
+
                             PostArtcle postArtcle = new PostArtcle(
                                     article_title,
                                     Objects.requireNonNull(downloadfile).toString(),
                                     semester,
                                     currentDate,
                                     user.getStudentName(),
-                                    FirebaseAuth.getInstance().getUid()
+                                    FirebaseAuth.getInstance().getUid(),
+                                    unique
 
                             );
-                            String unique = databaseReference.push().getKey();
+
 
                             FirebaseDatabase.getInstance().getReference("notification")
                                     .child(unique)

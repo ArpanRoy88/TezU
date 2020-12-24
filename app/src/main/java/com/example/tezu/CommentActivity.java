@@ -31,6 +31,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class CommentActivity extends AppCompatActivity {
 
@@ -97,12 +98,18 @@ public class CommentActivity extends AppCompatActivity {
     private void addComment(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Comments").child(postid);
 
+        String commentId = reference.push().getKey();
+
         HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("commentId", commentId);
         hashMap.put("comment", addcomment.getText().toString());
         hashMap.put("publisher", firebaseUser.getUid());
+        hashMap.put("postid", postid);
 
-        reference.push().setValue(hashMap);
-        addcomment.setText("");
+        
+
+        reference.child(Objects.requireNonNull(commentId)).setValue(hashMap);
+
     }
 
     private void getImage(final ImageView profilePic){
@@ -112,8 +119,15 @@ public class CommentActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
-//              to-do  FETCH PROFILE IMAGE AND LOSD INTO POST_IMAGE
-                Picasso.get().load(user.getProfilePic()).into(profilePic);
+//              to-do  FETCH PROFILE IMAGE AND LOAD INTO POST_IMAGE
+                if (user.getProfilePic().equals("Null"))
+                {
+                    Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/tezu-33542.appspot.com" +
+                            "/o/Student%2Fuserphoto.png?alt=media&token=5de695ae-9bfb-469f-8362-ed2eb5cbd22e").into(profilePic);
+                }
+                else {
+                    Picasso.get().load(user.getProfilePic()).into(profilePic);
+                }
             }
 
             @Override

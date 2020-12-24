@@ -93,11 +93,19 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     private void getUserInfo(final ImageView imageView, final TextView username, String publisherid){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Student").child(publisherid);
+
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
-                Picasso.get().load(user.getProfilePic()).into(imageView);
+                if (user.getProfilePic().equals("Null"))
+                {
+                    Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/tezu-33542.appspot.com" +
+                            "/o/Student%2Fuserphoto.png?alt=media&token=5de695ae-9bfb-469f-8362-ed2eb5cbd22e").into(imageView);
+                }
+                else {
+                    Picasso.get().load(user.getProfilePic()).into(imageView);
+                }
                 username.setText(user.getStudentName());
             }
 

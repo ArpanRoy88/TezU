@@ -3,17 +3,18 @@ package com.example.tezu.Model;
 public class ArticleModel {
 
     private String articleTitle,articleDate,articleBody;
-    private String articleAuthor,articleDepartment;
+    private String articleAuthor,articleDepartment,articleId;
 
     public ArticleModel() {
     }
 
-    public ArticleModel(String articleTitle, String articleDate, String articleBody, String articleAuthor, String articleDepartment) {
+    public ArticleModel(String articleTitle, String articleDate, String articleBody, String articleAuthor, String articleDepartment,String articleId) {
         this.articleTitle = articleTitle;
         this.articleDate = articleDate;
         this.articleBody = articleBody;
         this.articleAuthor = articleAuthor;
         this.articleDepartment = articleDepartment;
+        this.articleId=articleId;
     }
 
     public String getArticleTitle() {
@@ -54,5 +55,13 @@ public class ArticleModel {
 
     public void setArticleDepartment(String articleDepartment) {
         this.articleDepartment = articleDepartment;
+    }
+
+    public String getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(String articleId) {
+        this.articleId = articleId;
     }
 }

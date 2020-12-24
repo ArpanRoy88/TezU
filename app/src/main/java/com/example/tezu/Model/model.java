@@ -4,7 +4,7 @@ package com.example.tezu.Model;
 public class model{
 
 
-    private String file,magazineTitle;
+    private String file,magazineTitle,magazineId;
     private String magazinePublisher,semester;
 
 
@@ -14,9 +14,10 @@ public class model{
     }
 
 
-    public model(String file, String magazineTitle, String magazinePublisher, String semester) {
+    public model(String file, String magazineTitle, String magazineId,String magazinePublisher, String semester) {
         this.file = file;
         this.magazineTitle = magazineTitle;
+        this.magazineId=magazineId;
         this.magazinePublisher = magazinePublisher;
         this.semester = semester;
     }
@@ -51,5 +52,13 @@ public class model{
 
     public void setMagazineTitle(String magazineTitle) {
         this.magazineTitle = magazineTitle;
+    }
+
+    public String getMagazineId() {
+        return magazineId;
+    }
+
+    public void setMagazineId(String magazineId) {
+        this.magazineId = magazineId;
     }
 }

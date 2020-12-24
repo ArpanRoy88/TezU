@@ -32,6 +32,7 @@ import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.tezu.Model.AdUpload;
+import com.example.tezu.Model.Comment;
 import com.example.tezu.Model.Forum;
 import com.example.tezu.Model.Post;
 import com.example.tezu.Model.User;
@@ -44,6 +45,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -58,6 +60,7 @@ import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -121,7 +124,7 @@ public class UserProfile extends AppCompatActivity {
         txtstudentHostel = findViewById(R.id.profileStudentHostel);
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        UserId = FirebaseAuth.getInstance().getUid();
+        UserId = currentUser.getUid();
         //image view
         studentProfilePicture = findViewById(R.id.StudentProfilePicture);
 
@@ -187,9 +190,8 @@ public class UserProfile extends AppCompatActivity {
                 User user = snapshot.getValue(User.class);
                 if (user.getProfilePic().equals("Null"))
                 {
-                    Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/tezu-33542." +
-                            "appspot.com/o/Student%2Fuserphoto.png?alt=media&token=db4d39c7-e8a5-" +
-                            "47fe-8624-c40a4d22a626").into(studentProfilePicture);
+                    Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/tezu-33542.appspot.com" +
+                            "/o/Student%2Fuserphoto.png?alt=media&token=5de695ae-9bfb-469f-8362-ed2eb5cbd22e").into(studentProfilePicture);
                 }
                 else {
                     Picasso.get().load(user.getProfilePic()).into(studentProfilePicture);
@@ -271,7 +273,7 @@ public class UserProfile extends AppCompatActivity {
 
 //                        startActivity(new Intent(UserProfile.this, UserProfile.class));
                         getApplicationContext();
-//                        finish();
+                        finish();
                     }
                     else{
                         Toast.makeText(UserProfile.this,"Failed", LENGTH_SHORT).show();
@@ -443,8 +445,8 @@ public class UserProfile extends AppCompatActivity {
 
     private void delAcc() {
 
-
-        AlertDialog.Builder dialog = new AlertDialog.Builder(UserProfile.this);
+//        deleteEventInterested(UserId);
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(UserProfile.this);
         dialog.setTitle("Delete Account");
         dialog.setMessage("Are you sure you want to delete your account permanently?");
         dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
@@ -456,18 +458,30 @@ public class UserProfile extends AppCompatActivity {
                 loadingBar.show();
                 loadingBar.setCanceledOnTouchOutside(true);
 
+                deleteComment(UserId);
+                deleteEventInterested(UserId);
+                deleteAds(UserId); //delete ads posted by user
+                deleteEvents(UserId);
+                deleteForums(UserId);
+
+//                deleteUser(UserId);
                 currentUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
 
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
 
-                        deleteAds(UserId); //delete ads posted by user
-                        deleteEvents(UserId);
-                        deleteForums(UserId);
-                        deleteUser(UserId); //delete user database
+//                        deleteComment(UserId);
+//                        deleteAds(UserId); //delete ads posted by user
+//                        deleteEvents(UserId);
+//                        deleteForums(UserId);
+//                        deleteUser(UserId); //delete user database
 
                         if (task.isSuccessful()){
-
+                            try {
+                                TimeUnit.SECONDS.sleep(3);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             Toast.makeText(UserProfile.this,"Account Deleted Successfully",Toast.LENGTH_SHORT).show();
                             loadingBar.dismiss();
 
@@ -498,12 +512,85 @@ public class UserProfile extends AppCompatActivity {
         //return dialog;
     }
 
+    private void deleteEventInterested(final String userId) {
+
+        final DatabaseReference eventInterested = FirebaseDatabase.getInstance().getReference("EventInterested");
+
+        eventInterested.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot data : dataSnapshot.getChildren()){
+                    String Key = data.getKey();
+                    eventInterested.child(Key).child(userId).removeValue();
+                    }
+                }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                //handle data
+            }
+        });
+    }
+
+    private void deleteComment(final String userId) {
+
+        final DatabaseReference dbcomment = FirebaseDatabase.getInstance().getReference("Comments");
+
+        dbcomment.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                String Key = snapshot.getKey();
+                final DatabaseReference reference = dbcomment.child(Key);
+                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot data : snapshot.getChildren()){
+                            Comment com = data.getValue(Comment.class);
+                            String comuserid = com.getPublisher();
+                            if (comuserid.equals(userId)){
+
+                                reference.child(com.getCommentId()).removeValue();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 
     public void deleteUser(String userId){
 
         DatabaseReference dbStudent = FirebaseDatabase.getInstance().getReference("Student").child(userId);
 
         dbStudent.removeValue();
+//        logout();
 
     }
     public void deleteAds(final String userId){
@@ -574,8 +661,45 @@ public class UserProfile extends AppCompatActivity {
                     String eventUserId = event.getPublisher();
 
                     if (eventUserId.equals(uid)){
+                        final String postid = event.getPostid();
+                        dbEventUploads.child(postid).removeValue();
 
-                        dbEventUploads.child(event.getPostid()).removeValue();
+
+                        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Comments");
+                        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot data : snapshot.getChildren()){
+                                    String key = data.getKey();
+                                    if (key.equals(postid)){
+                                        ref.child(key).removeValue();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                        final DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("EventInterested");
+                        ref1.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot data : snapshot.getChildren()){
+                                    String key = data.getKey();
+                                    if (key.equals(postid)){
+                                        ref1.child(key).removeValue();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     }
                 }
             }

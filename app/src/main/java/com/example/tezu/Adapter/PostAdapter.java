@@ -113,7 +113,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         publisher(holder.image_profile, holder.username, post.getPublisher());
 
         isInterested(post.getPostid(), holder.interested);
-        noInterested(holder.total_interested, post.getPostid());
+        numberInterested(holder.total_interested, post.getPostid());
         getComments(post.getPostid(), holder.comments);
 
 
@@ -159,11 +159,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             @Override
             public void onClick(View v) {
                 if ( holder.interested.getTag().equals("interested")){
-                    FirebaseDatabase.getInstance().getReference().child("Interested").child(post.getPostid())
+                    FirebaseDatabase.getInstance().getReference().child("EventInterested").child(post.getPostid())
                             .child(firebaseUser.getUid()).setValue(true);
                 }else
                 {
-                    FirebaseDatabase.getInstance().getReference().child("Interested").child(post.getPostid())
+                    FirebaseDatabase.getInstance().getReference().child("EventInterested").child(post.getPostid())
                             .child(firebaseUser.getUid()).removeValue();
                 }
             }
@@ -211,14 +211,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
-                .child("Interested")
+                .child("EventInterested")
                 .child(postid);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.child(firebaseUser.getUid()).exists()){
                     imageView.setImageResource(R.drawable.is_interested);
-                    imageView.setTag("isinterested");
+                    imageView.setTag("notinterested");
                 }else {
                     imageView.setImageResource(R.drawable.ic_interested);
                     imageView.setTag("interested");
@@ -234,9 +234,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
 
 
-    private void noInterested(final TextView total_interested,String postid){
+    private void numberInterested(final TextView total_interested,String postid){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
-                .child("Interested")
+                .child("EventInterested")
                 .child(postid);
         reference.addValueEventListener(new ValueEventListener() {
             @Override

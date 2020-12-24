@@ -19,13 +19,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.tezu.Model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
@@ -59,6 +63,7 @@ public class StudentRegistration extends AppCompatActivity implements AdapterVie
     
     ProgressDialog loadingBar;
     Toolbar myToolbar;
+    String Roll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,13 +111,13 @@ public class StudentRegistration extends AppCompatActivity implements AdapterVie
             public void onClick(View view) {
 
                 //Toast.makeText(StudentRegistration.this,"CLICKED", LENGTH_SHORT).show();
+//                Roll = check();
                 createNewAccount();
 
             }
         });
 
         }
-
 
 
     //dropdown nested method for department and programme000
@@ -192,7 +197,6 @@ public class StudentRegistration extends AppCompatActivity implements AdapterVie
     private void createNewAccount() {
 
   //      Toast.makeText(StudentRegistration.this,"CLICKED", LENGTH_SHORT).show();
-
         //getting text from the fields
         final String studentGender = radioButtonGender.getText().toString();
         final String studentName = txtStudentName.getText().toString();
@@ -206,8 +210,38 @@ public class StudentRegistration extends AppCompatActivity implements AdapterVie
         final String studentProgramme = programmeSpinner.getSelectedItem().toString();
         final String studentHostel = hostelSpinner.getSelectedItem().toString();
         final String profilePic = "Null";
+        final int[] flag = {1};
 
-
+//        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Student");
+//
+//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                for (DataSnapshot data : dataSnapshot.getChildren()){
+//                    User user = data.getValue(User.class);
+//
+//                    String roll = user.getRollNumber().toString();
+//
+//                    if (TextUtils.equals(studentRollNumber,roll)) {
+//                        flag[0] = 0;
+//                        System.out.println("flaga "+flag[0]);
+////                        txtRollNumber.setError("Roll already present");
+////                        txtRollNumber.requestFocus();
+//                        return;
+//                    }
+//
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//                //handle data
+//            }
+//        });
+//
+//        System.out.println("flag "+flag[0]);
         //validation
         if (TextUtils.isEmpty(studentName)){
             //Toast.makeText(this,"Please Enter ", LENGTH_SHORT).show();
@@ -235,6 +269,7 @@ public class StudentRegistration extends AppCompatActivity implements AdapterVie
             txtRollNumber.requestFocus();
             return;
         }
+
         else if (TextUtils.isEmpty(studentPassword)){
             Toast.makeText(this,"Enter Password ", LENGTH_SHORT).show();
             txtPassword.requestFocus();
@@ -296,6 +331,7 @@ public class StudentRegistration extends AppCompatActivity implements AdapterVie
                                 studentHostel,
                                 profilePic
                         );
+
 
                         FirebaseDatabase.getInstance().getReference("Student")
                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())

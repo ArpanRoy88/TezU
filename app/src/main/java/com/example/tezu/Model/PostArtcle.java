@@ -7,15 +7,17 @@ public class PostArtcle {
     public String date;
     public String publisher;
     public String user_id;
+    public String magz_id;
 
 
-    public PostArtcle(String title, String url, String semester, String date, String publisher, String user_id) {
+    public PostArtcle(String title, String url, String semester, String date, String publisher, String user_id, String magz_id) {
         this.title = title;
         this.url = url;
         this.semester = semester;
         this.date = date;
         this.publisher = publisher;
         this.user_id = user_id;
+        this.magz_id=magz_id;
     }
 
 
@@ -65,5 +67,13 @@ public class PostArtcle {
 
     public void setUser_id(String user_id) {
         this.user_id = user_id;
+    }
+
+    public String getMagz_id() {
+        return magz_id;
+    }
+
+    public void setMagz_id(String magz_id) {
+        this.magz_id = magz_id;
     }
 }

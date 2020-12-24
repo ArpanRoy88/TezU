@@ -172,9 +172,6 @@ public class PostActivity extends AppCompatActivity {
                         Uri downloadUri = task.getResult();
                         myUrl = Objects.requireNonNull(downloadUri).toString();
 
-//                        System.out.println(myUrl);
-
-                        Toast.makeText(PostActivity.this,myUrl,Toast.LENGTH_SHORT).show();
                         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
 
                         String postId = reference.push().getKey();
@@ -203,7 +200,7 @@ public class PostActivity extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(PostActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostActivity.this,e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }

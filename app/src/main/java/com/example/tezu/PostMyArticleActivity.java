@@ -1,28 +1,22 @@
 package com.example.tezu;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tezu.Model.ArticleModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -32,6 +26,7 @@ import static android.widget.Toast.LENGTH_SHORT;
 public class PostMyArticleActivity extends AppCompatActivity {
 
     private EditText title,author,body,dept;
+    private String ArticleId;
 
     private Button post;
     ProgressDialog loadingBar;
@@ -57,7 +52,6 @@ public class PostMyArticleActivity extends AppCompatActivity {
         post=findViewById(R.id.postMy);
 
 
-
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,7 +75,10 @@ public class PostMyArticleActivity extends AppCompatActivity {
 
 
 
+
         databaseReference = FirebaseDatabase.getInstance().getReference("articles");
+        ArticleId=databaseReference.push().getKey();
+
 
         if (TextUtils.isEmpty(Title)){
             //Toast.makeText(this,"Please Enter ", LENGTH_SHORT).show();
@@ -119,17 +116,18 @@ public class PostMyArticleActivity extends AppCompatActivity {
 
 
 
-                    ArticleModel articleModel=new ArticleModel(
-                            Title,
-                            currentDate,
-                            Body,
-                            Author,
-                            Dept
-                    );
+            ArticleModel articleModel=new ArticleModel(
+                    Title,
+                    currentDate,
+                    Body,
+                    Author,
+                    Dept,
+                    ArticleId
+            );
 
-                    String unique = databaseReference.push().getKey();
-                    FirebaseDatabase.getInstance().getReference("articles").child(unique).setValue(articleModel)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+            String unique = databaseReference.push().getKey();
+            FirebaseDatabase.getInstance().getReference("articles").child(unique).setValue(articleModel)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             Toast.makeText(PostMyArticleActivity.this, "Article sent", LENGTH_SHORT).show();

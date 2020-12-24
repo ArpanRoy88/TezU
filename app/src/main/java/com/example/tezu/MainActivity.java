@@ -65,11 +65,11 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
 
     //END
-    @Override
-    protected void onStart() {
-        checkUserStatus();
-        super.onStart();
-    }
+//    @Override
+//    protected void onStart() {
+//        checkUserStatus();
+//        super.onStart();
+//    }
 
 
     @Override
@@ -115,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
 
         sendEmail();
+        checkUserStatus();
 
         //navigation onclick listener
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

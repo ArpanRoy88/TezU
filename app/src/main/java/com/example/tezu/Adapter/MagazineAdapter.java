@@ -16,9 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tezu.Model.model;
 import com.example.tezu.R;
 import com.example.tezu.viewPdf;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +34,10 @@ public class MagazineAdapter extends RecyclerView.Adapter<MagazineAdapter.myview
     public List<model> mlist=new ArrayList<>();
     public Context context;
     public FirebaseDatabase firebaseDatabase;
-    public DatabaseReference databaseReference;
+    public DatabaseReference databaseReference,viewReference;
 
     private FirebaseUser firebaseUser;
+    Boolean viewChecker=false;
 
 
     public MagazineAdapter(@NonNull List<model> mlist, Context applicationContext) {
@@ -54,18 +59,48 @@ public class MagazineAdapter extends RecyclerView.Adapter<MagazineAdapter.myview
     @Override
     public void onBindViewHolder(@NonNull final myviewholder holder, int position) {
 
+        final FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+        final String currentUserId=firebaseUser.getUid();
 
         final model mo = mlist.get(position);
 
         holder.header.setText(mo.getMagazineTitle());
         holder.publisher.setText(mo.getMagazinePublisher());
         holder.semester.setText(mo.getSemester());
+        final String postKey=mo.getMagazineId();
 
-
-
-       holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+        holder.setViewStatus(postKey);
+        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                viewReference=firebaseDatabase.getReference("MagazineArticleViews");
+                viewChecker=true;
+
+                viewReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        if(viewChecker.equals(true)){
+                            if(snapshot.child(postKey).hasChild(currentUserId)){
+//                                holder.setViewStatus(postKey);
+                                viewChecker=false;
+                            }
+                            else {
+                                viewReference.child(postKey).child(currentUserId).setValue(true);
+                                holder.setViewStatus(postKey);
+                                viewChecker=false;
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
                 Intent intent=new Intent(holder.img1.getContext(), viewPdf.class);
                 intent.putExtra("file",mo.getFile());
                 intent.putExtra("title",mo.getMagazineTitle());
@@ -90,6 +125,9 @@ public class MagazineAdapter extends RecyclerView.Adapter<MagazineAdapter.myview
         public TextView header;
         public TextView publisher,semester;
         public RelativeLayout relativeLayout;
+        public  TextView textviewbook;
+        int viewsCount;
+        DatabaseReference viewRef;
 
 
         public myviewholder(@NonNull View itemView) {
@@ -101,7 +139,33 @@ public class MagazineAdapter extends RecyclerView.Adapter<MagazineAdapter.myview
             semester=itemView.findViewById(R.id.txtSemesterInRecycler);
             relativeLayout=itemView.findViewById(R.id.magazineRecyclerRelative);
 
+        }
 
+        public void setViewStatus(final String postKey) {
+            textviewbook=itemView.findViewById(R.id.textviewbook);
+            viewRef=FirebaseDatabase.getInstance().getReference("MagazineArticleViews");
+            FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+            final String userId=firebaseUser.getUid();
+
+            viewRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                    if (snapshot.child(postKey).hasChild(userId)){
+                        viewsCount=(int)snapshot.child(postKey).getChildrenCount();
+                        textviewbook.setText(Integer.toString(viewsCount));
+                    }
+                    else {
+                        viewsCount=(int)snapshot.child(postKey).getChildrenCount();
+                        textviewbook.setText(Integer.toString(viewsCount));
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
 
         }
 
