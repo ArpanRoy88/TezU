@@ -1,19 +1,24 @@
 package com.example.tezu;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -89,10 +94,80 @@ public class MainLogin extends AppCompatActivity implements View.OnClickListener
                 break;
 
             case R.id.txtForgotPassword:
-                Toast.makeText(this,"Forgot Password Clicked",Toast.LENGTH_SHORT).show();
+                forgotPasswordDialog();
                 break;
         }
 
+    }
+
+    //alert dialog for forgot password
+    private void forgotPasswordDialog() {
+
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Recover your password");
+
+        LinearLayout linearLayout = new LinearLayout(this);
+
+
+        final EditText emailEditText = new EditText(this);
+
+        //emailEditText.setWidth(200);
+        emailEditText.setHint("please type your email");
+        emailEditText.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+
+
+        linearLayout.addView(emailEditText);
+        //linearLayout.setPadding(20,10,20,10);
+
+
+        dialog.setView(linearLayout);
+
+        //buttons
+
+        dialog.setPositiveButton("Recover", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                loadingBar.setMessage("Please wait");
+                loadingBar.show();
+
+                String email = emailEditText.getText().toString().trim();
+                startRecovery(email);
+
+            }
+        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                dialogInterface.dismiss();
+            }
+        });
+
+        dialog.create().show();
+    }
+
+    //recovery
+    private void startRecovery(final String email) {
+        mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    loadingBar.dismiss();
+                    Toast.makeText(MainLogin.this,"Email sent to" + email, Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    loadingBar.dismiss();
+                    Toast.makeText(MainLogin.this,"Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                loadingBar.dismiss();
+                Toast.makeText(MainLogin.this,"" + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     private void userLogin() {

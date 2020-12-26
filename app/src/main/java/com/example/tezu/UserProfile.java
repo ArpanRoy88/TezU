@@ -459,6 +459,7 @@ public class UserProfile extends AppCompatActivity {
                 loadingBar.setCanceledOnTouchOutside(true);
 
                 deleteComment(UserId);
+                deleteForumComment(UserId);
                 deleteEventInterested(UserId);
                 deleteAds(UserId); //delete ads posted by user
                 deleteEvents(UserId);
@@ -510,6 +511,56 @@ public class UserProfile extends AppCompatActivity {
         alertDialog.show();
 
         //return dialog;
+    }
+
+    private void deleteForumComment(final String userId) {
+        final DatabaseReference dbForumComment = FirebaseDatabase.getInstance().getReference("ForumComments");
+
+        dbForumComment.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                final String Key = snapshot.getKey();
+                final DatabaseReference reference = dbForumComment.child(Key);
+                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot data : snapshot.getChildren()){
+                            Comment com = data.getValue(Comment.class);
+                            String comUserId = com.getPublisher();
+                            if (comUserId.equals(userId)){
+
+                                reference.child(Key).removeValue();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void deleteEventInterested(final String userId) {
@@ -635,8 +686,26 @@ public class UserProfile extends AppCompatActivity {
                     String forumUserId = forum.getUserId();
 
                     if (forumUserId.equals(uid)){
+                        final String postId = forum.getPostID();
+                        dbForumUploads.child(postId).removeValue();
 
-                        dbForumUploads.child(forum.getForumID()).removeValue();
+                        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("ForumComments");
+                        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot data : snapshot.getChildren()){
+                                    String key = data.getKey();
+                                    if (key.equals(postId)){
+                                        ref.child(key).removeValue();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     }
                 }
             }

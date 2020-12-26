@@ -1,13 +1,21 @@
 package com.example.tezu.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.provider.CalendarContract;
+import android.provider.Settings;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,7 +66,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView image_profile, post_image, interested,comment;
-        public TextView username, total_interested,description,comments,date_time,title,location;
+        public TextView username, total_interested,description,comments,date_time,title;
+        public TextView location;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -75,6 +84,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             title = itemView.findViewById(R.id.title);
 //            location = itemView.findViewById(R.id.location);
             date_time = itemView.findViewById(R.id.date_time);
+            location = itemView.findViewById(R.id.loctext);
 
         }
     }
@@ -108,6 +118,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
         holder.date_time.setText(post.getDate_time());
         holder.title.setText(post.getTitle());
+        holder.location.setText(post.getLocation());
 
 //        CALIING FUNCTION
         publisher(holder.image_profile, holder.username, post.getPublisher());
@@ -116,6 +127,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         numberInterested(holder.total_interested, post.getPostid());
         getComments(post.getPostid(), holder.comments);
 
+//        holder.location.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                displayPopupWindow(v, post.getLocation());
+//            }
+//        });
 
         holder.image_profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,8 +205,40 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                 mContext.startActivity(intent);
             }
         });
+        
+        
 
     }
+
+//    private void displayPopupWindow(View v, String location) {
+//
+//        LinearLayout viewGroup = (LinearLayout) v.findViewById(R.id.popup);
+//        LayoutInflater layoutInflater = (LayoutInflater) mContext
+//                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        View layout = layoutInflater.inflate(R.layout.popup_loc, viewGroup);
+//
+//        final PopupWindow popup = new PopupWindow(mContext);
+//
+//        popup.setContentView(LayoutInflater.from(mContext).inflate(R.layout.popup_loc, null));
+//        // Set content width and height
+//        popup.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+//        popup.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
+//
+//        // Closes the popup window when touch outside of it - when looses focus
+//        popup.setOutsideTouchable(true);
+//        popup.setFocusable(true);
+//        // Show anchored to button
+//        popup.setBackgroundDrawable(new BitmapDrawable());
+////        popup.showAtLocation(layout, Gravity.NO_GRAVITY, 30, 30);
+//
+//        TextView textLoc = (TextView) layout.findViewById(R.id.popup_loc_text);
+//        System.out.println(textLoc);
+//        System.out.println(location);
+//        textLoc.setVisibility(v.VISIBLE);
+//        textLoc.setText("Hi");
+//        popup.showAsDropDown(layout);
+//
+//    }
 
     private void getComments(String postid, final TextView comments){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Comments").child(postid);

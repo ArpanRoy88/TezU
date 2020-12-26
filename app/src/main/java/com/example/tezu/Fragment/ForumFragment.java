@@ -80,8 +80,6 @@ public class ForumFragment extends Fragment {
         recyclerView.setAdapter(forumAdapter);
 
 
-
-
         readForums();
         
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
@@ -95,7 +93,6 @@ public class ForumFragment extends Fragment {
             }
         });
 
-    //For showing forum
 
 
         return view;

@@ -109,6 +109,7 @@ public class CommentActivity extends AppCompatActivity {
         
 
         reference.child(Objects.requireNonNull(commentId)).setValue(hashMap);
+        addcomment.setText("");
 
     }
 

@@ -67,23 +67,23 @@ public class ForumAdapter extends RecyclerView.Adapter<ForumAdapter.ViewHolder> 
 //            System.out.println("TITLE1" + forum.getTitle());
 
         }
-        isInterested(forum.getForumID(), holder.save);
+//        isInterested(forum.getForumID(), holder.save);
         forumViewed(forum.getForumID(), holder.forumView);
         totalView(forum.getForumID(), holder.views);
 
-        holder.save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if ( holder.save.getTag().equals("interested")){
-                    FirebaseDatabase.getInstance().getReference().child("Favourite").child(forum.getForumID())
-                            .child(firebaseUser.getUid()).setValue(true);
-                }else
-                {
-                    FirebaseDatabase.getInstance().getReference().child("Favourite").child(forum.getForumID())
-                            .child(firebaseUser.getUid()).removeValue();
-                }
-            }
-        });
+//        holder.save.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if ( holder.save.getTag().equals("interested")){
+//                    FirebaseDatabase.getInstance().getReference().child("Favourite").child(forum.getForumID())
+//                            .child(firebaseUser.getUid()).setValue(true);
+//                }else
+//                {
+//                    FirebaseDatabase.getInstance().getReference().child("Favourite").child(forum.getForumID())
+//                            .child(firebaseUser.getUid()).removeValue();
+//                }
+//            }
+//        });
 
         holder.forumView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,14 +116,14 @@ public class ForumAdapter extends RecyclerView.Adapter<ForumAdapter.ViewHolder> 
 
         public ImageView image_profile;
         public TextView forumView,username,views;
-        public ImageView save;
+//        public ImageView save;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             image_profile = itemView.findViewById(R.id.image_profile);
             forumView = itemView.findViewById(R.id.forumView);
             username = itemView.findViewById(R.id.username);
-            save = itemView.findViewById(R.id.save);
+//            save = itemView.findViewById(R.id.save);
             views = itemView.findViewById(R.id.views);
         }
     }

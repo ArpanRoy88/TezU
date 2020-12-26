@@ -27,11 +27,11 @@
     </ImageView>
 
     <TextView
+        android:id="@+id/title"
         android:layout_marginTop="230dp"
         android:layout_marginLeft="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/aclonica"
         android:text="EMERGENCY CONTACTS"
         android:textColor="@color/colorBlack"
         android:textStyle="bold"
@@ -39,135 +39,13 @@
 
     </TextView>
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rec_contacts"
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="300dp">
+        android:layout_height="250dp"
+        android:layout_below="@+id/title"
+        android:layout_centerVertical="true"
+        android:scrollbars="vertical"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:text="Name"
-            android:textStyle="bold"
-            android:textSize="17dp"
-            android:textColor="@color/colorBlack"/>
-
-        <TextView
-            android:id="@+id/number1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
-            android:text="Number"
-            android:textSize="17dp"
-            android:textColor="@color/colorBlack"/>
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/call"
-            android:layout_marginLeft="50dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="340dp">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:text="Name"
-            android:textStyle="bold"
-            android:textSize="17dp"
-            android:textColor="@color/colorBlack"/>
-
-        <TextView
-            android:id="@+id/number2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
-            android:text="Number"
-            android:textSize="17dp"
-            android:textColor="@color/colorBlack"/>
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/call"
-            android:layout_marginLeft="50dp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="380dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:text="Name"
-            android:textStyle="bold"
-            android:textSize="17dp"
-            android:textColor="@color/colorBlack"/>
-
-        <TextView
-            android:id="@+id/number3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
-            android:text="Number"
-            android:textSize="17dp"
-            android:textColor="@color/colorBlack"/>
-
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/call"
-            android:layout_marginLeft="50dp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="420dp">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:text="Name"
-            android:textStyle="bold"
-            android:textSize="17dp"
-            android:textColor="@color/colorBlack"/>
-
-
-        <TextView
-            android:id="@+id/number4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
-            android:text="Number"
-            android:textSize="17dp"
-            android:textColor="@color/colorBlack"/>
-
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/call"
-            android:layout_marginLeft="50dp"/>
-
-
-    </LinearLayout>
 </RelativeLayout>

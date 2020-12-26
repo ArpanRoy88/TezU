@@ -47,14 +47,14 @@
 
     <string-array name="CSE_Programs">
         <item>MCA</item>
-        <item>Btech</item>
-        <item>Mtech</item>
+        <item>BTech</item>
+        <item>MTech</item>
         <item>Phd</item>
     </string-array>
 
     <string-array name="ECE_Civil_Programs">
-        <item>Btech</item>
-        <item>Mtech</item>
+        <item>BTech</item>
+        <item>MTech</item>
         <item>Phd</item>
     </string-array>
 
@@ -71,17 +71,20 @@
     </string-array>
 
     <string-array name="men_hostels">
-        <item>KMH</item>
-        <item>Nilachal Men Hostel</item>
-        <item>CMH</item>
-        <item>PMH</item>
+        <item>Kanchanjungha Mens Hostel</item>
+        <item>Nilachal Mens Hostel</item>
+        <item>Charaidau Mens Hostel</item>
+        <item>Patkai Mens Hostel</item>
+        <item>Transit Mens Hostel</item>
+        <item>C.V. Raman Mens HOSTEL</item>
     </string-array>
 
     <string-array name="women_hostels">
-        <item>Bordoichila</item>
-        <item>Subansiri Women Hostel</item>
-        <item>PWH</item>
-        <item>Transit Women Hostel</item>
+        <item>Bordoichila Womens Hostel</item>
+        <item>Subansiri Womens Hostel</item>
+        <item>Pragjyoti Womens Hostel</item>
+        <item>Transit Womens Hostel</item>
+        <item>Kopili Womens Hostel</item>
     </string-array>
 
 

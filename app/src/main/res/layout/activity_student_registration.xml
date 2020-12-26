@@ -100,7 +100,7 @@
             android:inputType="textEmailAddress"
             android:layout_below="@id/editTextRollNumber"
             android:layout_centerHorizontal="true"
-            android:hint="TU mail id"
+            android:hint="Enter MailId"
             android:layout_marginTop="10dp"/>
 
         <com.google.android.material.textfield.TextInputLayout
